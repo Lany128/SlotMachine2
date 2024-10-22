@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Design;
 using System.Security.Cryptography;
 
 namespace slotMachine
@@ -28,14 +29,15 @@ namespace slotMachine
             string amountConfirmation = Console.ReadLine().ToLower();
 
             if (amountConfirmation == "yes")
+            {
 
                 int[,] array2D = new int[3, 3];
 
-            Random randomNumber = new Random();
-            /*int slotMachineNum = randomNumber.Next(1,4);*/ //-> 2
-            
-            // Fill the array
-            for (int i = 0; i < 3; i++) // Loop through rows
+                Random randomNumber = new Random();
+                /*int slotMachineNum = randomNumber.Next(1,4);*/ //-> 2
+
+                // Fill the array
+                for (int i = 0; i < 3; i++) // Loop through rows
                 {
                     for (int j = 0; j < 3; j++)// loop through columns
                     {
@@ -44,18 +46,18 @@ namespace slotMachine
 
                 }
 
-            // Print the 3x3 array
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
+                // Print the 3x3 array
+                for (int i = 0; i < 3; i++)
                 {
-                    Console.Write(array2D[i, j]); // Print elements in a row
+                    for (int j = 0; j < 3; j++)
+                    {
+                        Console.Write(array2D[i, j]); // Print elements in a row
+                    }
+                    Console.WriteLine();// Move to the next row
                 }
-                Console.WriteLine();// Move to the next row
+
             }
-
-
-            if (amountConfirmation == "no")
+           
             {
 
             }
