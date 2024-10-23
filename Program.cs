@@ -10,6 +10,9 @@ namespace slotMachine
         {
             const int MIN_NUM = 1;
             const int MAX_NUM = 4;
+            const int COLUMS = 3;
+            const int ROWS = 3;
+            const int GRID_SIZE = 3;
             //double inicialAmount = 0;
             // 1)Welcome message
             Console.WriteLine("Welcome to the Slot Machine Game");
@@ -31,10 +34,10 @@ namespace slotMachine
             if (amountConfirmation == "yes")
             {
 
-                int[,] array2D = new int[3, 3];
+                int[,] array2D = new int[COLUMS, ROWS];
 
                 Random randomNumber = new Random();
-                /*int slotMachineNum = randomNumber.Next(1,4);*/ //-> 2
+               
 
                 // Fill the array
                 for (int i = 0; i < 3; i++) // Loop through rows
@@ -46,10 +49,20 @@ namespace slotMachine
 
                 }
 
+                // 0 1 0 0 0 5/2 ->2.5->2 3/2 -> 1.5 ->1 7/2-> 3.5 ->3
+                // 1 1 1 
+                // 1 1 0 
+                // 1 1 0
+                
+
+                //[0,0] -> [1,1] -> [2,2] ....
+                //if (array2D[0,0] == array2D[0,j])
+                //if (array2D[1,0] == array2D[1,j])
+
                 // Print the 3x3 array
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < GRID_SIZE; i++)
                 {
-                    for (int j = 0; j < 3; j++)
+                    for (int j = 0; j < GRID_SIZE; j++)
                     {
                         Console.Write(array2D[i, j]); // Print elements in a row
                     }
