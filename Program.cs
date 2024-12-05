@@ -16,6 +16,8 @@ namespace slotMachine
 
             int betAmount = 0;
 
+           
+
             Console.WriteLine("Welcome to the slot Machine Game!");
             Console.WriteLine("Let's start! ");
             int initialBalance;
@@ -37,14 +39,13 @@ namespace slotMachine
 
                 if (!isValidNum)
                 {
-                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                    Console.WriteLine("Invalid input. Please enter a positive number.");
 
                 }
 
                 else
                 {
-                    Console.WriteLine("Balance too low. Please add more balance or exit the game. ");
-
+                    break;
 
                 }
 
@@ -64,8 +65,21 @@ namespace slotMachine
                         break;
                     }
 
-                    Console.WriteLine("Invalid bet.\nPlease enter a valid indput.");
+                    else
+                    {
+                        Console.WriteLine("Balance too low. Please add more balance or press E to exit the game. ");
+
+                        string existGame = Console.ReadLine().ToUpper();
+
+                        if (existGame == "E")
+                        {
+                            Console.WriteLine($"You have exit the game.\nYou have finished the game with {initialBalance}");
+                            break;
+                        }
+                       
+                    }
                 }
+
                 string directionChoice = "";
 
                 while (directionChoice != "V" && directionChoice != "H" && directionChoice != "D" && directionChoice != "F")
@@ -77,12 +91,13 @@ namespace slotMachine
 
                     if (directionChoice != "V" && directionChoice != "H" && directionChoice != "D" && directionChoice != "F")
                     {
-                        Console.WriteLine($"You have chosen {directionChoice}. Are you sure? (press Y or N)");
+                        Console.WriteLine($"You have chosen {directionChoice}. Is this correct? (press Y or N)");
                         string confirmation = Console.ReadLine().ToUpper();
 
                         if (confirmation == "Y")
                         {
-
+                            //Breaks the loop when Y is chosen
+                            break;
 
                         }
                     }
@@ -138,12 +153,15 @@ namespace slotMachine
             }
         }
 
+        // Method to check horizontal winning combinations
+
         static bool CHECK_HORIZONTAL(int[,] grid, int gridSize)
         {
 
             for (int ROWS = 0; ROWS < gridSize; ROWS++)
             {
                 //check horizontal
+
                 if (grid[ROWS, 0] == grid[ROWS, 1] && grid[ROWS, 1] == grid[ROWS, 2])
                 {
                     return true;// if there is any much it will return true
