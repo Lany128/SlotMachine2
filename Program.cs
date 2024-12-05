@@ -76,6 +76,7 @@ namespace slotMachine
                             Console.WriteLine($"You have exit the game.\nYou have finished the game with {initialBalance}");
                             break;
                         }
+
                        
                     }
                 }
