@@ -19,7 +19,20 @@ namespace slotMachine
             const int MIN_NUM = 1;
 
             const int MAX_NUM = 3;
+
             const string EXIT_GAME = "E";
+
+            const string HORIZONTAL = "H";
+
+            const string VERTICAL = "V";
+            
+            const string DIAGONAL = "D";
+            
+            const string ALL_DIRECTIONS = "A";
+            
+            const string YES ="Y";
+            
+            const string NO ="N";
 
             int betAmount = 0;
 
@@ -110,16 +123,16 @@ namespace slotMachine
                 {
                     Console.WriteLine("Which direction do you want to try your luck in?");
 
-                    Console.WriteLine("V - vertical\nH - horizotal \nD - diagonal \nF - All direction");
+                    Console.WriteLine("V - vertical\nH - horizotal \nD - diagonal \nA - All direction");//****NEED TO BECOME CONSTANTS****
 
                     directionChoice = Console.ReadLine().ToUpper();
 
-                    if (directionChoice == "V" || directionChoice == "H" || directionChoice == "D" || directionChoice == "F")
+                    if (directionChoice == VERTICAL || directionChoice == HORIZONTAL || directionChoice == DIAGONAL || directionChoice == ALL_DIRECTIONS)
                     {
                         Console.WriteLine($"You have chosen {directionChoice}. Is this correct? (press Y or N)");
                         string confirmation = Console.ReadLine().ToUpper();
 
-                        if (confirmation == "Y")
+                        if (confirmation == YES)
                         {
                             //Breaks the loop when Y is chosen
                             break;
@@ -155,22 +168,25 @@ namespace slotMachine
 
                 Console.WriteLine("Slot machine result:");
 
+
+               
+
                 for (int i = 0; i < ROWS; i++)
                 {
                     for (int j = 0; j < COLUMNS; j++)
                     {
-                        Console.Write(slotGrid[i, j]); // Print elements in a row
+                        Console.Write(slotGrid[i, j] + " "); // Print elements in a row .(+ " ") adds space between the numbers
                     }
                     Console.WriteLine();// Move to the next row
                 }
-                List<string> winningDirections = new List<string>(); // This is a list to store winning directions and numbers
+                List<string> winningDirections = new List<string>(); // A list that will store winning directions 
 
                 bool checkForWin = false;
 
                 int winnings = 0; // Initialize a variable to store the winnings
 
 
-                if (directionChoice == "H" || directionChoice == "F")// Check if the direction choice is horizontal or all directions
+                if (directionChoice == HORIZONTAL || directionChoice == ALL_DIRECTIONS)// Check if the direction choice is horizontal or all directions
                 {
 
                     for (int i = 0; i < ROWS; i++) // Loop through the rows
@@ -184,13 +200,14 @@ namespace slotMachine
                             checkForWin = true; // Set checkForWin to true
 
                             winnings += betAmount; // Earn the bet amount for each winning line
+
                             winningDirections.Add($" Horizontal (Row{i + 1}: {slotGrid[i, 0]} {slotGrid[i, 1]} {slotGrid[i, 2]})"); // will add the winning row and its numbers.
                         }
 
                     }
 
                 }
-                if (directionChoice == "V" || directionChoice =="F") // check if the directions choise is vertical or all directions
+                if (directionChoice == VERTICAL || directionChoice == ALL_DIRECTIONS) // check if the directions choise is vertical or all directions
 
                 {
                     for (int j = 0; j <COLUMNS; j++)
@@ -209,11 +226,11 @@ namespace slotMachine
 
                 }
 
-                if (directionChoice == "D" ||directionChoice == "F") // check if the directions choise is vertical or all directions
+                if (directionChoice == DIAGONAL ||directionChoice == ALL_DIRECTIONS) // check if the directions choise is vertical or all directions
 
                 {
-                    for (int j = 0; j < COLUMNS; j++)
-                    {
+                    //for (int j = 0; j < COLUMNS; j++)
+                    
 
                         if (slotGrid[0, 0] == slotGrid[1, 1] && slotGrid[1, 1] == slotGrid[2, 2]) // Check for a main diagonal win
                            
@@ -232,12 +249,10 @@ namespace slotMachine
 
                             winnings += betAmount;
 
-                            winningDirections.Add($" Ant-diagonal: {slotGrid[0, 0]} {slotGrid[1, 1]} {slotGrid[2, 2]}");
+                            winningDirections.Add($" Ant-diagonal: {slotGrid[0, 2]} {slotGrid[1, 1]} {slotGrid[2, 0]}");
 
                         }
-                        
-                    }
-
+                       
                 }
 
                 
@@ -254,8 +269,36 @@ namespace slotMachine
                     initialBalance -= betAmount;
                 }
 
-                Console.WriteLine($"Your current balance is:${initialBalance}");
+                //Console.WriteLine($"Your current balance is:${initialBalance}");
+                
+                if (initialBalance == 0)
+                {
+                    Console.WriteLine($"Your balance is {initialBalance}, do you wish to add more money? (Y/N)");
+                    string lowBalance = Console.ReadLine().ToLower();
+
+                    if ( lowBalance == YES ) 
+                    {
+                        Console.WriteLine("How much would you like to add to your balance?");
+                        
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("**** GAME OVER ****");
+                    }
+                }
             }
+
+            
+            
+            Console.WriteLine(" Do you wish to continue playing?\nPress Y(Yes) or N(No)");
+            string exitGame = Console.ReadLine().ToLower();
+
+            if (exitGame == YES)
+            {
+                Console.WriteLine("lets continue playing");  
+            }
+
         }
 
         // Method to check horizontal winning combinations
@@ -297,7 +340,6 @@ namespace slotMachine
             return false;
 
         }
-
 
     }
 
